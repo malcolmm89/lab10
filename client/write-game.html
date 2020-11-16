@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>Write Game</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/js/game.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Enter Game Data Into Data Base</h1>
+    </header>
+    
+    <main>
+        <section>
+            <form>
+                <div>
+                    <label for="gameTitle">Game Title</label>
+                    <input type="text" id="gameTitle" name="gameTitle" size=30>
+                </div>
+                <div>
+                    <label for="developer">Devlper</label>
+                    <input type="text" id="developer" name="developer" size=30>
+                </div>
+                <div>
+                    <label for="publisher">Publisher</label>
+                    <input type="text" id="publisher" name="publisher" size=30>
+                </div>
+                <div>
+                    <label for="releaseDate">Release Date</label>
+                    <input type="text" id="releaseDate" name="releaseDate" size=30>
+                </div>
+                <div>
+                    <label for="score">Score</label>
+                    <input type="text" id="score" name="score" size=30>
+                </div>
+
+                <div id="save">
+                    <button id="data-submit">Submit</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        activateSubmitButton();
+    </script>
+
+</body>
+
+</html>
