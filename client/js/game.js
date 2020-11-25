@@ -8,7 +8,7 @@ function activateSubmitButton() {
         var score = $('#score').val();
 
         var d = new Date();
-        var id = "lib" + d.getTime();
+        var id = "ID" + d.getTime();
 
         var jsonString = JSON.stringify({ id: id, gameTitle: gameTitle, developer: developer, publisher: publisher, releaseDate: releaseDate, score: score });
 

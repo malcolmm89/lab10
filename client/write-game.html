@@ -5,7 +5,9 @@
 <head>
     <title>Write Game</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="/js/game.js"></script>
+    <script src="/client/js/config.js"></script>
+    <script src="/client/js/write.js" async></script>
+    <link rel="stylesheet" href="css/tableCSS.css" type="text/css"/>
 </head>
 
 <body>
@@ -13,7 +15,18 @@
         <h1>Enter Game Data Into Data Base</h1>
     </header>
     
+    <nav>
+        <div id="rout-write">
+            <a href="/client/index.html" id="index">Home</a>
+            <a href="/client/write-game.html" id="add-rout">Add Game</a>
+            <a href="/client/browse-game.html" id="browse-rout">Browse Game</a>
+        </div>
+    </nav>
+
     <main>
+
+        <img class="floatright" src="/client/css/img/game-1.jpg" alt="game">
+
         <section>
             <form>
                 <div>
@@ -21,7 +34,7 @@
                     <input type="text" id="gameTitle" name="gameTitle" size=30>
                 </div>
                 <div>
-                    <label for="developer">Devlper</label>
+                    <label for="developer">Developer</label>
                     <input type="text" id="developer" name="developer" size=30>
                 </div>
                 <div>
@@ -42,11 +55,10 @@
                 </div>
             </form>
         </section>
-    </main>
 
-    <script>
-        activateSubmitButton();
-    </script>
+        <div id="writehero"></div>
+
+    </main>
 
 </body>
 

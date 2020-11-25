@@ -5,8 +5,9 @@
 <head>
     <title>Browse Game</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="/js/game.js"></script>
-    <link rel="stylesheet" href="css/tableCSS.css" />
+    <script src="/client/js/config.js"></script>
+    <script src="/client/js/browse.js" async></script>
+    <link rel="stylesheet" href="css/tableCSS.css" type="text/css"/>
 </head>
 
 <body>
@@ -14,22 +15,30 @@
         <h1>Browse Game</h1>
     </header>
 
+    <nav>
+        <div id="rout-browse">
+            <a href="/client/index.html" id="index">Home</a>
+            <a href="/client/write-game.html" id="add-rout">Add Game</a>
+            <a href="/client/browse-game.html" id="browse-rout">Browse Game</a>
+        </div>
+    </nav>
+
     <table class="game-table">
         <thead>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Developer</th>
-            <th>Publisher</th>
-            <th>Release Date</th>
-            <th>Score</th>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Developer</th>
+        <th>Publisher</th>
+        <th>Release Date</th>
+        <th>Score</th>
+        <th>Delete</th>
         </thead>
 
         <tbody id="gameTable"></tbody>
+
     </table>
-    
-    <script>
-        getGameData();
-    </script>
+
+    <script id="deleteGame"></script>
 </body>
 
 </html>

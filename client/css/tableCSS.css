@@ -13,11 +13,76 @@ body {
 
 h1 {
     text-align: center;
-    font-size: 18px;
+    font-size: 40px;
     text-transform: uppercase;
     letter-spacing: 1px;
     color: white;
     padding: 30px 0;
+}
+
+nav {
+    text-align: center;
+    background: -webkit-linear-gradient(left, #25c481, #25b7c4);
+    background: linear-gradient(to right, #25c481, #25b7c4);
+    padding-bottom: 2em;
+    font-size: 20px;
+}
+
+nav a {
+    padding-left: 3em;
+    padding-right: 3em;
+}
+
+p {
+    text-align: center;
+}
+
+#gamehero {
+    height: 500px;
+    background-image: url(img/game-2.jpg);
+    background-size: auto;
+    background-position: center;
+    background-repeat: repeat;
+}
+
+/* Write Styles */
+
+section {
+    padding-left: 15em;
+    padding-top: 2em;
+}
+
+div {
+    padding: 0.5em;
+}
+
+label {
+    float: left;
+    font-weight: bold;
+    font-size: 1.3em;
+    display: block;
+    text-align: right;
+    width: 10em;
+    padding-right: 1em;
+    padding-top: 15px;
+}
+
+input {
+    border: 5px solid white;
+    box-shadow: inset 0 0 8px rgba(0,0,0,0.1), 0 0 16px rgba(0,0,0,0.1);
+    padding: 15px;
+    background: rgba(255,255,255,0.5);
+    margin: 0 0 10px 0;
+}
+
+#save {
+    padding-left: 27em;
+}
+
+.floatright {
+    height: 500px;
+    float: right;
+    margin-right: 10em;
 }
 
 /* Table Styles */
