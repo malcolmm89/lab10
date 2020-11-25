@@ -43,9 +43,8 @@ var services = function (app) {
     //delete
     app.delete('/delete-record', function (req, res) {
         console.log("Starting Delete...\n");
-        var delData = req.body.data; //there is no data here
+        var delData = req.body.data;
         console.log(delData + "<-- no data\n");
-        var delID = delData.id;
 
         fs.readFile(outputFile, "utf8", function (err, data) {
             if (err) {
@@ -53,17 +52,16 @@ var services = function (app) {
             }
             else {
                 data = "[" + data + "]";
-                res.send(data);
-                //console.log(data + " <-- data?");
 
                 var parsedData = JSON.parse(data);
                 for (var i = 0; i < parsedData.length; i++) {
-                    if (delID == parsedData[i].id) {
+                    if (delData == parsedData[i].id) {
                         parsedData.splice(i, 1);
                         break;
                     }
                     //console.log(parsedData[i].id + " <-- data?");
                 }
+
                 var deleteStr = JSON.stringify(parsedData);
                 //remove []
                 deleteStr = deleteStr.replace("[", "");

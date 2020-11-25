@@ -27,8 +27,8 @@ function createGameTable(gameData) {
         tableHTML += "<td>" + gameData[i].publisher + "</td>";
         tableHTML += "<td>" + gameData[i].releaseDate + "</td>";
         tableHTML += "<td>" + gameData[i].score + "</td>";
-        tableHTML += "<td class='del-submit'><button data-id='" + gameData[i].id + "'>Delete</button></td>";
-        //tableHTML += "<td class='del-submit2'><button onclick='deleteGame2(" + gameData[i].id + ")'>Delete</button></td>";
+        tableHTML += "<td><button class='del-submit' data-id='" + gameData[i].id + "'>Delete</button></td>";
+        //tableHTML += "<td><button class='del-submit' onclick='deleteGame2(" + gameData[i].id + ")'>Delete</button></td>";
         tableHTML += "</tr>"
 
     }
