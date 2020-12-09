@@ -15,6 +15,10 @@ var router = function (app) {
         res.status(200).sendFile(path.join(__dirname + "/../client/index.html"));
     });
 
+    app.get('/angular', function (req, res) {
+        res.status(200).sendFile(path.join(__dirname + "/../client/game.html"));
+    });
+
 }
 
 module.exports = router;

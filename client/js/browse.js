@@ -43,7 +43,7 @@ function delGame() {
     $('.del-submit').click(function () {
         console.log("button hit");
         var gameID = this.getAttribute("data-id");
-        console.log(gameID + " <-- why null");
+        //console.log(gameID + " <-- why null");
         $.ajax({
             url: gameURL + "/delete-record",
             type: "delete",

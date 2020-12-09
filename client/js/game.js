@@ -1,58 +1,37 @@
 
-function activateSubmitButton() {
-    $('#data-submit').click(function () {
-        var gameTitle = $('#gameTitle').val();
-        var developer = $('#developer').val();
-        var publisher = $('#publisher').val();
-        var releaseDate = $('#publisher').val();
-        var score = $('#score').val();
+var game = [];
+var activateGame = 0;
 
-        var d = new Date();
-        var id = "ID" + d.getTime();
+var app = angular.module("browseGamesAng", []);
 
-        var jsonString = JSON.stringify({ id: id, gameTitle: gameTitle, developer: developer, publisher: publisher, releaseDate: releaseDate, score: score });
+app.controller("browseGamesCntrl", function ($scope, $http) {
 
-        $.ajax({
-            url: "http://localhost:4500/write-record",
-            type: "post",
-            data: { data: jsonString },
-            success: function (response) {
-                alert(response);
-            },
-            error: function (err) {
-                alert(err);
-            }
+    $scope.obj = [];
+    //console.log($scope.obj);
+
+    $scope.getGame = function () {
+        $http({
+            method: "get",
+            url: gameURL + '/browse-record'
+        }).then(function (response) {
+            game = response.data;
+            $scope.obj = game[activateGame];
+            $scope.showHide();
+        }, function (response) {
+                console.log(response);
         });
-    });
-}
+    };
 
-function getGameData() {
-    $.ajax({
-        url: "http://localhost:4500/read-record",
-        type: "get",
-        success: function (response) {
-            var data = jQuery.parseJSON(response);
-            createGameTable(data);
-        },
-        error: function (err) {
-            alert(err);
-        }
-    });
-}
+    $scope.getGame();
 
-function createGameTable(gameData) {
-    var tableHTML = ""
-
-    for (var i = 0; i < gameData.length; i++) {
-        tableHTML += "<tr>";
-            tableHTML += "<td>" + gameData[i].id + "</td>";
-            tableHTML += "<td>" + gameData[i].gameTitle + "</td>";
-            tableHTML += "<td>" + gameData[i].developer + "</td>";
-            tableHTML += "<td>" + gameData[i].publisher + "</td>";
-            tableHTML += "<td>" + gameData[i].releaseDate + "</td>";
-            tableHTML += "<td>" + gameData[i].score + "</td>";
-        tableHTML += "</tr>"
-
+    $scope.changeGame = function (direction) {
+        activateGame += direction;
+        $scope.obj = game[activateGame];
+        $scope.showHide();
     }
-    $('#gameTable').html(tableHTML);
-}
+
+    $scope.showHide = function () {
+        $scope.hidePrev = (activateGame == 0) ? true : false;
+        $scope.hideNext = (activateGame == game.length - 1) ? true : false;
+    }
+});

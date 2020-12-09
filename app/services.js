@@ -7,8 +7,7 @@ var services = function (app) {
     //write
     app.post('/write-record', function (req, res) {
         var data = req.body.data;
-
-        console.log(data + "<-- dtat?");
+        //console.log(data + "<-- dtat?");
 
         if (fs.existsSync(outputFile)) {
             data = "," + data;
@@ -34,17 +33,17 @@ var services = function (app) {
             else {
                 data = "[" + data + "]";
                 //console.log(data);
-                console.log("\nread is working \n");
                 res.send(data);
+                console.log("\nread is working \n");
             }
         });
     });
 
     //delete
     app.delete('/delete-record', function (req, res) {
-        console.log("Starting Delete...\n");
+        //console.log("Starting Delete...\n");
         var delData = req.body.data;
-        console.log(delData + "<-- no data\n");
+        //console.log(delData + "<-- data\n");
 
         fs.readFile(outputFile, "utf8", function (err, data) {
             if (err) {
@@ -75,9 +74,27 @@ var services = function (app) {
                     }
                     else {
                         res.send("success");
-                        console.log("\n it worked \n");
+                        console.log("\n Delete worked \n");
                     }
                 });
+            }
+        });
+    });
+
+    //angular
+    app.get('/browse-record', function (req, res) {
+        fs.readFile(outputFile, "utf8", function (err, data) {
+            if (err) {
+                res.send(err);
+                console.log("\nerror in angular \n");
+            }
+            else {
+                data = "[" + data + "]";
+                data = JSON.parse(data);
+                console.log(data);
+                res.send(data);
+                //res.send("success");
+                console.log("\nBrowse is working \n");
             }
         });
     });

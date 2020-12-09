@@ -45,6 +45,12 @@ p {
     background-repeat: repeat;
 }
 
+#ang {
+    font-size: 1em;
+    padding-right: 1em;
+}
+
+
 /* Write Styles */
 
 section {

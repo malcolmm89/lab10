@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>Games</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="/client/js/config.js"></script>
+    <script src="/client/js/game.js"></script>
+    <link rel="stylesheet" href="css/tableCSS.css" type="text/css" />
+</head>
+
+<body data-ng-app="browseGamesAng" data-ng-controller="browseGamesCntrl">
+
+    <header>
+        <h1>Browse the Game Data Base</h1>
+    </header>
+
+    <nav>
+        <div id="rout-game">
+            <a href="/client/index.html" id="index">Home</a>
+            <a href="/client/write-game.html" id="add-rout">Add Game</a>
+            <a href="/client/browse-game.html" id="browse-rout">Game Table</a>
+            <a href="/client/game.html" id="game-rout">Browse Game</a>
+        </div>
+    </nav>
+
+    <main>
+
+        <img class="floatright" src="/client/css/img/cells.jpg" alt="game">
+
+        <section>
+            <form>
+                <div id="ang">
+                    <div>
+                        <label for="id">ID: </label>
+                        <label id="id">{{obj.id}}</label>
+                    </div>
+
+                    <div>
+                        <label for="gameTitle">Title: </label>
+                        <label id="gameTitle">{{obj.gameTitle}}</label>
+                    </div>
+                    <div>
+                        <label for="developer">Developer: </label>
+                        <label id="developer">{{obj.developer}}</label>
+                    </div>
+                    <div>
+                        <label for="publisher">Publisher: </label>
+                        <label id="publisher">{{obj.publisher}}</label>
+                    </div>
+                    <div>
+                        <label for="releaseDate">Release Date: </label>
+                        <label id="releaseDate">{{obj.releaseDate}}</label>
+                    </div>
+                    <div>
+                        <label for="score">Score: </label>
+                        <label id="score">{{obj.score}}</label>
+                    </div>
+                </div>
+
+                <div>
+                    <button id="prev" data-ng-click="changeGame(-1)" data-ng-hide="hidePrev">Prev</button>
+                </div>
+                <div>
+                    <button id="next" data-ng-click="changeGame(1)" data-ng-hide="hideNext">Next</button>
+                </div>
+
+            </form>
+        </section>
+        
+    </main>
+ 
+ 
+
+</body>
+
+</html>
