@@ -1,4 +1,78 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>Write Game</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="/client/js/config.js"></script>
+    <script src="/client/js/write.js"></script>
+    <link rel="stylesheet" href="css/tableCSS.css" type="text/css" />
+</head>
+
+<body data-ng-app="addGame" data-ng-controller="addGameCntrl">
+    <header>
+        <h1>Enter Game Data Into Data Base</h1>
+    </header>
+
+    <nav>
+        <div id="rout-write">
+            <a href="/client/index.html" id="index">Home</a>
+            <a href="/client/write-game.html" id="add-rout">Add Game</a>
+            <a href="/client/browse-game.html" id="browse-rout">Game Table</a>
+            <a href="/client/game.html" id="game-rout">Browse Game</a>
+        </div>
+    </nav>
+
+    <main>
+
+        <img class="floatright" src="/client/css/img/game-1.jpg" alt="game">
+
+        <section>
+            <form>
+                <div>
+                    <label for="gameTitle">Game Title</label>
+                    <input type="text" id="gameTitle" data-ng-model="gameTitle" size=30>
+                </div>
+                <div>
+                    <label for="developer">Developer</label>
+                    <input type="text" id="developer" data-ng-model="developer" size=30>
+                </div>
+                <div>
+                    <label for="publisher">Publisher</label>
+                    <input type="text" id="publisher" data-ng-model="publisher" size=30>
+                </div>
+                <div>
+                    <label for="releaseDate">Release Date</label>
+                    <input type="text" id="releaseDate" data-ng-model="releaseDate" size=30>
+                </div>
+                <div>
+                    <label for="score">Score</label>
+                    <input type="text" id="score" data-ng-model="score" size=30>
+                </div>
+
+                <div class="save">
+                    <button id="submit" data-ng-click="submitGame()">Submit</button>
+                </div>
+            </form>
+        </section>
+
+     <div>{{addResults}}</div>
+
+    </main>
+
+</body>
+
+</html>
+
+
+<!--
+/////////////////////////////////////////////////////////////////////////////////////////////////////    
+-->
+
+<!--
+<!DOCTYPE html>
 
 <html lang="en">
 
@@ -14,7 +88,7 @@
     <header>
         <h1>Enter Game Data Into Data Base</h1>
     </header>
-    
+
     <nav>
         <div id="rout-write">
             <a href="/client/index.html" id="index">Home</a>
@@ -62,3 +136,4 @@
 </body>
 
 </html>
+-->

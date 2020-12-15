@@ -12,11 +12,16 @@ app.controller("browseGamesCntrl", function ($scope, $http) {
     $scope.getGame = function () {
         $http({
             method: "get",
-            url: gameURL + '/browse-record'
+            url: gameURL + '/read-record'
         }).then(function (response) {
-            game = response.data;
-            $scope.obj = game[activateGame];
-            $scope.showHide();
+            if (response.data.msg == "success") {
+                game = response.data.games;
+                $scope.obj = game[activateGame];
+                $scope.showHide();
+            }
+            else {
+                console.log(response.data.msg);
+            }
         }, function (response) {
                 console.log(response);
         });

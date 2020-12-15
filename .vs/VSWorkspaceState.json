@@ -5,8 +5,9 @@
     "\\app\\files",
     "\\client",
     "\\client\\css",
+    "\\client\\css\\img",
     "\\client\\js"
   ],
-  "SelectedNode": "\\client\\js\\game.js",
+  "SelectedNode": "\\client\\js\\browse.js",
   "PreviewInSolutionExplorer": false
 }

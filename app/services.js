@@ -1,104 +1,98 @@
-const fs = require('fs');
+const MongoClient = require("mongodb").MongoClient;
+const ObjectID = require("mongodb").ObjectId;
 
-var outputFile = './files/game.txt';
+const dbURL = process.env.DB_URL || "mongodb://localhost";
 
 var services = function (app) {
 
-    //write
+    //write mongo
     app.post('/write-record', function (req, res) {
-        var data = req.body.data;
-        //console.log(data + "<-- dtat?");
+        var gameTitle = req.body.gameTitle;
+        var developer = req.body.developer;
+        var publisher = req.body.publisher;
+        var releaseDate = req.body.releaseDate;
+        var score = req.body.score;
 
-        if (fs.existsSync(outputFile)) {
-            data = "," + data;
+        var newGame = {
+            gameTitle: gameTitle,
+            developer: developer,
+            publisher: publisher,
+            releaseDate: releaseDate,
+            score: score
         }
 
-        fs.appendFile(outputFile, data, function (err) {
+        MongoClient.connect(dbURL, { useUnifiedTopology: true }, function (err, client) {
             if (err) {
-                res.send(err);
+                return res.status(200).send(JSON.stringify({ msg: "error " + err }));
             }
             else {
-                res.send("success");
-                console.log("\n write is working \n");
-            }
-        });
-    });
+                var dbo = client.db("gameDB");
 
-    //read
-    app.get('/read-record', function (req, res) {
-        fs.readFile(outputFile, "utf8", function (err, data) {
-            if (err) {
-                res.send(err);
-            }
-            else {
-                data = "[" + data + "]";
-                //console.log(data);
-                res.send(data);
-                console.log("\nread is working \n");
-            }
-        });
-    });
-
-    //delete
-    app.delete('/delete-record', function (req, res) {
-        //console.log("Starting Delete...\n");
-        var delData = req.body.data;
-        //console.log(delData + "<-- data\n");
-
-        fs.readFile(outputFile, "utf8", function (err, data) {
-            if (err) {
-                res.send(err);
-            }
-            else {
-                data = "[" + data + "]";
-
-                var parsedData = JSON.parse(data);
-                for (var i = 0; i < parsedData.length; i++) {
-                    if (delData == parsedData[i].id) {
-                        parsedData.splice(i, 1);
-                        break;
-                    }
-                    //console.log(parsedData[i].id + " <-- data?");
-                }
-
-                var deleteStr = JSON.stringify(parsedData);
-                //remove []
-                deleteStr = deleteStr.replace("[", "");
-                deleteStr = deleteStr.replace("]", "");
-
-                //fs.write
-                fs.writeFile(outputFile, deleteStr, function (err) {
+                dbo.collection("games").insertOne(newGame, function (err, response) {
                     if (err) {
-                        res.send(err);
-                        console.log("error");
+                        client.close();
+                        return res.status(200).send(JSON.stringify({ msg: "success" }));
                     }
                     else {
-                        res.send("success");
-                        console.log("\n Delete worked \n");
+                        client.close();
+                        return res.status(200).send(JSON.stringify({ msg: "success" }));
                     }
                 });
             }
         });
-    });
+    });  //end of write
 
-    //angular
-    app.get('/browse-record', function (req, res) {
-        fs.readFile(outputFile, "utf8", function (err, data) {
+    //read mongo
+    app.get('/read-record', function (req, res) {
+        MongoClient.connect(dbURL, { useUnifiedTopology: true }, function (err, client) {
             if (err) {
-                res.send(err);
-                console.log("\nerror in angular \n");
+                return res.status(200).send(JSON.stringify({ msg: "error " + err }));
             }
             else {
-                data = "[" + data + "]";
-                data = JSON.parse(data);
-                console.log(data);
-                res.send(data);
-                //res.send("success");
-                console.log("\nBrowse is working \n");
+                var dbo = client.db("gameDB");
+
+                dbo.collection("games").find().toArray(function (err, data) {
+                    if (err) {
+                        client.close();
+                        return res, status(200).send(JSON.stringify({ msg: "error " + err }));
+                    }
+                    else {
+                        client.close();
+                        return res.status(200).send(JSON.stringify({ msg: "success", games: data }));
+                    }
+                });
             }
         });
-    });
+    });  //end read
 
-}
+    app.delete('/delete-record', function (req, res) {
+        var gameID = req.query.gameId;
+
+        var g_id = new ObjectID(gameID);
+        var search = { _id: g_id };
+
+        MongoClient.connect(dbURL, { useUnifiedTopology: true }, function (err, client) {
+            if (err) {
+                return res.status(200).send(JSON.stringify({ msg: "error " + err }));
+            }
+            else {
+                var dbo = client.db("gameDB");
+
+                dbo.collection("games").deleteOne(search, function (err, data) {
+                    if (err) {
+                        client.close();
+                        return res.status(200).send(JSON.stringify({ msg: "error " + err }));
+                    }
+                    else {
+                        client.close();
+                        return res.status(200).send(JSON.stringify({ msg: "success" }));
+                    }
+                });
+            }
+        });
+
+    });  //end of delete
+
+}  //end of sevices function
 
 module.exports = services;

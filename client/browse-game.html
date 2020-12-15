@@ -4,6 +4,62 @@
 
 <head>
     <title>Browse Game</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="/client/js/config.js"></script>
+    <script src="/client/js/browse.js"></script>
+    <link rel="stylesheet" href="css/tableCSS.css" type="text/css" />
+</head>
+
+<body data-ng-app="tableApp" data-ng-controller="tableCtrl">
+    <header>
+        <h1>Browse Game</h1>
+    </header>
+
+    <nav>
+        <div id="rout-browse">
+            <a href="/client/index.html" id="index">Home</a>
+            <a href="/client/write-game.html" id="add-rout">Add Game</a>
+            <a href="/client/browse-game.html" id="browse-rout">Game Table</a>
+            <a href="/client/game.html" id="game-rout">Browse Game</a>
+        </div>
+    </nav>
+
+    <table class="game-table">
+        <thead>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Developer</th>
+            <th>Publisher</th>
+            <th>Release Date</th>
+            <th>Score</th>
+            <th>Delete</th>
+        </thead>  
+        
+        <tr data-ng-repeat="obj in games">
+            <td>{{obj._id}}</td>
+            <td>{{obj.gameTitle}}</td>
+            <td>{{obj.developer}}</td>
+            <td>{{obj.publisher}}</td>
+            <td>{{obj.releaseDate}}</td>
+            <td>{{obj.score}}</td>
+            <td><button data-ng-click="deleteGame(obj._id)">Delete</button></td>
+        </tr>
+    </table>
+
+</body>
+
+</html>
+
+<!--
+/////////////////////////////////////////////////////////////////////////////
+-->
+<!--
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>Browse Game</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="/client/js/config.js"></script>
     <script src="/client/js/browse.js" async></script>
@@ -43,3 +99,4 @@
 </body>
 
 </html>
+-->

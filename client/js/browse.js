@@ -1,3 +1,49 @@
+var app = angular.module("tableApp", []);
+
+app.controller('tableCtrl', function ($scope, $http) {
+    $scope.games = [];
+
+    $scope.getGames = function () {
+        $http({
+            method: "get",
+            url: gameURL + "/read-record"
+        }).then(function (response) {
+            if (response.data.msg == "success") {
+                $scope.games = response.data.games;
+            }
+            else {
+                console.log(response.data.games);
+            }
+        }, function (response) {
+                console.log(response);
+        });
+    }
+
+    $scope.deleteGame = function (gameID) {
+        console.log(gameID);
+        $http({
+            method: "delete",
+            url: gameURL + "/delete-record",
+            params: { gameId: gameID }
+        }).then(function (response) {
+            if (response.data.msg == "success") {
+                $scope.getGames();
+            }
+            else {
+                console.log(respones.data.msg);
+            }
+        }, function (response) {
+                console.log(response);
+        });
+    }
+
+    $scope.getGames();
+});
+
+
+///////////////////////////////////////////////////////////////
+
+/*
 //Read
 function read() {
     $.ajax({
@@ -44,26 +90,6 @@ function delGame() {
         console.log("button hit");
         var gameID = this.getAttribute("data-id");
         //console.log(gameID + " <-- why null");
-        $.ajax({
-            url: gameURL + "/delete-record",
-            type: "delete",
-            data: { data: gameID },
-            success: function (response) {
-                read();
-            },
-            error: function (err) {
-                alert(err);
-            }
-        });
-    });
-}
-//*/
-
-/* Delete function
-var del = function deleteGame2(gameID) {
-    $('.del-submit2').click(function () {
-        console.log("button hit");
-        console.log(gameID);
         $.ajax({
             url: gameURL + "/delete-record",
             type: "delete",
