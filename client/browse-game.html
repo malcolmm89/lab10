@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/tableCSS.css" type="text/css" />
 </head>
 
-<body data-ng-app="tableApp" data-ng-controller="tableCtrl">
+<body data-ng-app="tableApp" data-ng-controller="tableCtrl" data-ng-init="hideForm=true">
     <header>
         <h1>Browse Game</h1>
     </header>
@@ -24,28 +24,69 @@
         </div>
     </nav>
 
-    <table class="game-table">
-        <thead>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Developer</th>
-            <th>Publisher</th>
-            <th>Release Date</th>
-            <th>Score</th>
-            <th>Delete</th>
-        </thead>  
-        
-        <tr data-ng-repeat="obj in games">
-            <td>{{obj._id}}</td>
-            <td>{{obj.gameTitle}}</td>
-            <td>{{obj.developer}}</td>
-            <td>{{obj.publisher}}</td>
-            <td>{{obj.releaseDate}}</td>
-            <td>{{obj.score}}</td>
-            <td><button data-ng-click="deleteGame(obj._id)">Delete</button></td>
-        </tr>
-    </table>
+    <div data-ng-hide="hideTable">
+        <div>
+            <label for="groupBy">Game Publishers: </label>
+            <select id="groupBy" 
+                    data-ng-model="selectedPublisher" 
+                    data-ng-options="publisher.display for publisher in publishers"
+                    data-ng-change="redraw()">
+            </select>
+        </div>
 
+        <table class="game-table">
+            <thead>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Developer</th>
+                <th>Publisher</th>
+                <th>Release Date</th>
+                <th>Score</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </thead>  
+        
+                <tr data-ng-repeat="obj in games">
+                    <td>{{obj._id}}</td>
+                    <td>{{obj.gameTitle}}</td>
+                    <td>{{obj.developer}}</td>
+                    <td>{{obj.publisher}}</td>
+                    <td>{{obj.releaseDate}}</td>
+                    <td>{{obj.score}}</td>
+                    <td><button data-ng-click="editGame($index)">Edit</button></td>
+                    <td><button data-ng-click="deleteGame(obj._id)">Delete</button></td>
+                </tr>
+        </table>
+    </div>
+
+    <section data-ng-hide="hideForm">
+        <form>
+            <div>
+                <label for="gameTitle">Game Title</label>
+                <input type="text" id="gameTitle" data-ng-model="gameTitle" size=30>
+            </div>
+            <div>
+                <label for="developer">Developer</label>
+                <input type="text" id="developer" data-ng-model="developer" size=30>
+            </div>
+            <div>
+                <label for="publisher">Publisher</label>
+                <input type="text" id="publisher" data-ng-model="publisher" size=30>
+            </div>
+            <div>
+                <label for="releaseDate">Release Date</label>
+                <input type="text" id="releaseDate" data-ng-model="releaseDate" size=30>
+            </div>
+            <div>
+                <label for="score">Score</label>
+                <input type="text" id="score" data-ng-model="score" size=30>
+            </div>
+
+            <div class="save">
+                <button id="update" data-ng-click="updateGame()">Update</button>
+            </div>
+        </form>
+    </section>
 </body>
 
 </html>
